@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>FirstStrides – Beginner Running for Students</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --green-dark: #1f5b3f;
+      --green: #2f7f55;
+      --green-light: #cfe7d6;
+      --cream: #f7f3e9;
+      --earth: #b58a5a;
+      --text-dark: #1f2933;
+      --text-muted: #5f6c7b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: var(--white);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-tagline {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+      align-items: center;
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text h1 span {
+      color: var(--green-light);
+    }
+
+    .hero-text p {
+      color: var(--cream);
+      max-width: 32rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      background: var(--cream);
+      color: var(--green-dark);
+      border: none;
+      padding: 0.75rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.22);
+    }
+
+    .hero-note {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    .hero-card {
+      background: var(--cream);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero-card h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--green-dark);
+    }
+
+    .hero-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-light);
+      color: var(--green-dark);
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Stats bar */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      background: var(--white);
+      border-radius: 999px;
+      padding: 0.9rem 1.4rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+      margin-bottom: 2rem;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-value {
+      font-weight: 700;
+      color: var(--green-dark);
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-heading {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+      color: var(--green-dark);
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 36rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Problem */
+    .problem {
+      background: var(--white);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .problem ul {
+      margin-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    .problem li {
+      margin-bottom: 0.35rem;
+      color: var(--text-muted);
+    }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: 0.9rem;
+      padding: 1.1rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+    }
+
+    .feature-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* How it works */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .step-card {
+      background: var(--green-light);
+      border-radius: 0.9rem;
+      padding: 1.1rem;
+    }
+
+    .step-number {
+      width: 1.7rem;
+      height: 1.7rem;
+      border-radius: 999px;
+      background: var(--green-dark);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    /* Testimonial */
+    .testimonial {
+      background: var(--white);
+      border-left: 4px solid var(--earth);
+      border-radius: 0.9rem;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+      font-size: 0.95rem;
+    }
+
+    .testimonial-quote {
+      font-style: italic;
+      margin-bottom: 0.6rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+      color: var(--earth);
+      font-size: 0.9rem;
+    }
+
+    /* Email sign-up */
+    .signup {
+      background: var(--green-dark);
+      color: var(--cream);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .signup p {
+      font-size: 0.9rem;
+      max-width: 26rem;
+      color: var(--green-light);
+    }
+
+    .signup-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .signup-form input[type="email"] {
+      flex: 1 1 180px;
+      padding: 0.7rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .signup-form button {
+      background: var(--earth);
+      color: var(--white);
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.1s ease, transform 0.1s ease;
+    }
+
+    .signup-form button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .signup-note {
+      font-size: 0.75rem;
+      margin-top: 0.4rem;
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--green-dark);
+      font-weight: 500;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .signup {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .stats-bar {
+        grid-template-columns: 1fr;
+        border-radius: 1rem;
+      }
+
+      .features-grid,
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">FirstStrides</div>
+    <div class="nav-tagline">Beginner running for sustainable student communities</div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <h1>
+          Your first step to <span>confident running</span> in a sustainable city.
+        </h1>
+        <p>
+          FirstStrides helps students build consistent running habits that support
+          healthier, more active communities — aligned with UN SDG 11: Sustainable
+          Cities and Communities.
+        </p>
+        <div class="hero-cta">
+          <button class="btn-primary" id="hero-cta">Start Your First Stride</button>
+          <span class="hero-note">No pressure. No leaderboard. Just your progress.</span>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h2>This week at a glance</h2>
+        <p>
+          Track your weekly progress in one simple view — distance, runs, and time
+          spent moving through your city.
+        </p>
+        <div class="hero-badge">
+          🌱 67% of your weekly goal completed
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats bar -->
+    <section class="stats-bar" aria-label="Weekly progress statistics">
+      <div class="stat">
+        <div class="stat-label">Runs this week</div>
+        <div class="stat-value" id="stat-runs">2 / 3</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Distance</div>
+        <div class="stat-value" id="stat-distance">4.2 km</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Active minutes</div>
+        <div class="stat-value" id="stat-minutes">38 mins</div>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section>
+      <h2 class="section-heading">The problem for beginner student runners</h2>
+      <p class="section-subtitle">
+        Many students want to be more active, but existing fitness apps are built
+        for experienced athletes, not beginners trying to move more in their own
+        neighbourhoods.
+      </p>
+      <div class="problem">
+        <p>Students often struggle because:</p>
+        <ul>
+          <li>Most apps feel competitive, data‑heavy, and intimidating.</li>
+          <li>There is little guidance for building sustainable, low‑pressure habits.</li>
+          <li>Progress is hard to see, so motivation drops quickly.</li>
+          <li>Running is rarely linked to the idea of improving local communities.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section>
+      <h2 class="section-heading">How FirstStrides supports sustainable student running</h2>
+      <p class="section-subtitle">
+        FirstStrides is designed for beginners: simple, supportive, and focused on
+        small wins that add up to healthier, more active cities.
+      </p>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-tag">Progress</div>
+          <h3>Weekly dashboard</h3>
+          <p>
+            See your distance, runs, and active minutes at a glance — no complex
+            analytics, just clear progress.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-tag">Support</div>
+          <h3>Beginner‑friendly plans</h3>
+          <p>
+            Flexible training plans that fit around lectures, part‑time work, and
+            student life — not the other way around.
+          </p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-tag">Community</div>
+          <h3>Active, sustainable cities</h3>
+          <p>
+            Every run contributes to a more active campus and community, supporting
+            UN SDG 11: Sustainable Cities and Communities.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section>
+      <h2 class="section-heading">How it works</h2>
+      <p class="section-subtitle">
+        Getting started takes less than two minutes — and your first run can be as
+        short as ten.
+      </p>
+      <div class="steps-grid">
+        <article class="step-card">
+          <div class="step-number">1</div>
+          <h3>Create your profile</h3>
+          <p>
+            Tell us you’re a beginner and how often you’d like to run each week.
+          </p>
+        </article>
+        <article class="step-card">
+          <div class="step-number">2</div>
+          <h3>Follow your simple plan</h3>
+          <p>
+            Get a realistic, low‑pressure plan that fits around your timetable and
+            local routes.
+          </p>
+        </article>
+        <article class="step-card">
+          <div class="step-number">3</div>
+          <h3>Track small wins</h3>
+          <p>
+            Log each run, earn gentle milestones, and watch your confidence grow
+            week by week.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section>
+      <h2 class="section-heading">What students are saying</h2>
+      <div class="testimonial">
+        <p class="testimonial-quote">
+          “I always found running apps intimidating. FirstStrides feels like it was
+          built for someone exactly like me — a beginner who just wants to move
+          more around campus without feeling judged.”
+        </p>
+        <p class="testimonial-name">— Maya, 2nd‑year student runner</p>
+      </div>
+    </section>
+
+    <!-- Email sign-up -->
+    <section class="signup" id="signup">
+      <div>
+        <h2 class="section-heading" style="color: var(--cream); margin-bottom: 0.5rem;">
+          Get your free 7‑day beginner running plan
+        </h2>
+        <p>
+          Enter your email to receive a simple, student‑friendly plan you can start
+          this week — no spam, no pressure.
+        </p>
+      </div>
+      <div>
+        <form class="signup-form" id="signup-form">
+          <input
+            type="email"
+            id="email"
+            placeholder="you@university.ac.uk"
+            required
+          />
+          <button type="submit">Send me the plan</button>
+        </form>
+        <p class="signup-note" id="signup-message">
+          We’ll only use your email to send you running resources related to
+          FirstStrides.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      FirstStrides · Student‑led running startup supporting
+      <strong>UN SDG 11: Sustainable Cities and Communities</strong>.
+    </p>
+    <p>
+      Built for coursework · View source on <a href="#">GitHub</a>.
+    </p>
+  </footer>
+
+  <script>
+    // Smooth scroll from hero CTA to sign-up
+    document.getElementById("hero-cta").addEventListener("click", () => {
+      document.getElementById("signup").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Simple fake sign-up handler
+    const form = document.getElementById("signup-form");
+    const emailInput = document.getElementById("email");
+    const message = document.getElementById("signup-message");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+      if (!email) return;
+
+      message.textContent =
+        "Thanks, " +
+        email +
+        "! Your 7‑day beginner running plan is on its way.";
+      emailInput.value = "";
+    });
+  </script>
+</body>
+</html>
